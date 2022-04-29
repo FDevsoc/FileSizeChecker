@@ -65,17 +65,16 @@ namespace FileSizeChecker
 
             try
             {
-                DirectoryContext.WriteDirectoryTree(p.Object.Path, p.Object.Quite, p.Object.Humanread);
+              DirectoryContext.WriteDirectoryTree(p.Object.Path, p.Object.Quite, p.Object.Humanread);
 
-                if (args.Contains("-o") || args.Contains("--output"))
-                  FileContext.WriteLogInFile(p.Object.Output);
-                else
-                FileContext.DefaultWriteLog();
+              if (args.Contains("-o") || args.Contains("--output"))
+                FileContext.WriteLogInFile(p.Object.Output);
+              else
+                  FileContext.DefaultWriteLog();
             }
             catch
             {
-                Console.WriteLine("Ошибка доступа к запрашиваемому пути. " +
-                                  "Перейдите в корневой каталог программы.");
+                Console.WriteLine("Ошибка доступа к запрашиваемому пути.");
                 Environment.Exit(0);
             }
         }

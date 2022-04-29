@@ -5,18 +5,17 @@ namespace FileSizeChecker.Controllers
 {
     public static class FileContext
     {
+        static readonly string[] SizeSuffixes =
+           { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+
         static public string GetDefaultFilePath()
         {
-            string path = GetDefaultPath();
+            string path = Environment.CurrentDirectory;
             DateTime fileDateCreated = DateTime.Now;
             string dateInFileName = fileDateCreated.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
             path += @$"\sizes-{dateInFileName}.txt";
 
             return path;
-        }
-        static public void DefaultWriteLog()
-        {
-            WriteLogInFile(GetDefaultFilePath());
         }
 
         static public void WriteLogInFile(string path)
@@ -30,9 +29,11 @@ namespace FileSizeChecker.Controllers
             }
         }
 
+        static public void DefaultWriteLog()
+        {
+            WriteLogInFile(GetDefaultFilePath());
+        }
 
-        static readonly string[] SizeSuffixes =
-                   { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
         static public string SizeSuffix(long value, int decimalPlaces = 1)
         {
             if (decimalPlaces < 0) { throw new ArgumentOutOfRangeException("decimalPlaces"); }
@@ -52,15 +53,6 @@ namespace FileSizeChecker.Controllers
             return string.Format("{0:n" + decimalPlaces + "} {1}",
                 adjustedSize,
                 SizeSuffixes[mag]);
-        }
-
-        static public string GetDefaultPath()
-        {
-            FileInfo tempFile = new FileInfo("any.txt");
-            string path = tempFile.DirectoryName;
-            tempFile.Delete();
-
-            return path;
         }
     }
 }
