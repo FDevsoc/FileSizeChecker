@@ -1,7 +1,7 @@
 ﻿using FileSizeChecker.Controllers;
 using Fclp;
 
-namespace FileSizeChecker
+namespace FileSizeChecker.Views
 {
     class Program
     {
