@@ -74,7 +74,8 @@ namespace FileSizeChecker
             }
             catch
             {
-                Console.WriteLine("Ошибка доступа к запрашиваемому пути.");
+                Console.WriteLine("Ошибка доступа к запрашиваемому пути. \n" +
+                                  "Невозможно запустить программу из текущей директории.");
                 Environment.Exit(0);
             }
         }
